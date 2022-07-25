@@ -27,7 +27,7 @@ jobs:
       
     - name: Copy artifact in staging folder
       run: |
-        mkdir staging && cp traget/*.jar staging
+        mkdir staging && cp traget/*.war staging
       
     - name: Cache local Maven repository
       uses: actions/cache@v2

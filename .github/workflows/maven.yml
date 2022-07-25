@@ -25,6 +25,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       
+    - name: Copy artifact in staging folder
+      run: |
+        mkdir staging && cp traget/*.jar staging
+      
     - name: Cache local Maven repository
       uses: actions/cache@v2
       with:
@@ -33,8 +37,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
       
-    - name: List the current directory
-      run: ls -la
+    - name: Persist workflow data as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: github-actions-artifact
+        path: staging
       
     - name: Where is target folder?
       run: |
